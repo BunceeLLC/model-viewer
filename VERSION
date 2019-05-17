@@ -1,0 +1,9 @@
+commit feb1488d4249d0b859cbd49ad4a78690068d0306
+Author: Mr.doob <info@mrdoob.com>
+Date:   Thu May 16 17:44:13 2019 -0700
+
+    Renderer: Fixed vertical alignment regression. (#552)
+    
+    * Renderer: Fixed vertical alignment regression.
+    
+    * Renderer: Fixed context.drawImage() parameters.
