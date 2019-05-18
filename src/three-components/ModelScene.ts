@@ -65,11 +65,11 @@ export default class ModelScene extends Scene {
   private[$modelAlignmentMask] = new Vector3(1, 1, 1);
   private canvas: HTMLCanvasElement;
   private renderer: Renderer;
-  private shadow: StaticShadow;
   private light: HemisphereLight;
   private shadowLight: DirectionalLight;
   private aspect: number;
 
+  public shadow: StaticShadow;
   public pivot: Object3D;
   public width: number;
   public height: number;
