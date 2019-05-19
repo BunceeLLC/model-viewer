@@ -63,9 +63,9 @@ const $modelAlignmentMask = Symbol('modelAlignmentMask');
 export default class ModelScene extends Scene {
   private[$paused]: boolean = false;
   private[$modelAlignmentMask] = new Vector3(1, 1, 1);
-  private canvas: HTMLCanvasElement;
   private aspect: number;
 
+  public canvas: HTMLCanvasElement;
   public light: HemisphereLight;
   public renderer: Renderer;
   public shadowLight: DirectionalLight;
