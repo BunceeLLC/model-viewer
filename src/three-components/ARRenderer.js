@@ -82,7 +82,7 @@ export class ARRenderer extends EventDispatcher {
     }
 
     this.renderer = new WebGLRenderer(
-        {canvas: this.inputCanvas, context: this.inputContext});
+        {canvas: this.inputCanvas, context: this.inputContext, alpha: true});
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(1);
     this.renderer.autoClear = false;

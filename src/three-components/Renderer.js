@@ -63,7 +63,9 @@ export default class Renderer extends EventDispatcher {
       this.renderer = new WebGLRenderer({
         canvas: this.canvas,
         context: this.context,
+        alpha: true
       });
+      this.renderer.setClearColor( 0x000000, 0 );
       this.renderer.autoClear = false;
       this.renderer.gammaOutput = true;
       this.renderer.gammaFactor = 2.2;
@@ -187,6 +189,7 @@ export default class Renderer extends EventDispatcher {
 
       const widthDPR = width * dpr;
       const heightDPR = height * dpr;
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height); 
       context.drawImage(
           this.renderer.domElement,
           0,
