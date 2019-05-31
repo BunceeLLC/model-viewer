@@ -54318,6 +54318,20 @@ class ModelScene extends Scene {
     }
 }
 
+const THREE$1 = Object.assign({}, ThreeModule);
+const TransparentWebGLRenderer = THREE$1.TransparentWebGLRenderer = THREE$1.WebGLRenderer;
+TransparentWebGLRenderer.prototype.clear = function (color, depth, stencil) {
+    var bits = 0;
+    if (color === undefined || color)
+        bits |= _gl.COLOR_BUFFER_BIT;
+    if (depth === undefined || depth)
+        bits |= _gl.DEPTH_BUFFER_BIT;
+    if (stencil === undefined || stencil)
+        bits |= _gl.STENCIL_BUFFER_BIT;
+    _gl.clearColor(0, 0, 0, 0);
+    _gl.clear(bits);
+};
+
 const matrix4 = new Matrix4();
 const originArray = new Float32Array(3);
 const directionArray = new Float32Array(3);
@@ -55166,13 +55180,13 @@ var PMREMGenerator = ( function () {
 
 } )();
 
-const THREE$1 = Object.assign({}, ThreeModule);
-const CubemapGenerator = THREE$1.CubemapGenerator = function (renderer) {
+const THREE$2 = Object.assign({}, ThreeModule);
+const CubemapGenerator = THREE$2.CubemapGenerator = function (renderer) {
     this.renderer = renderer;
 };
-THREE$1.CubemapGenerator.prototype.fromEquirectangular = function (texture, options) {
+THREE$2.CubemapGenerator.prototype.fromEquirectangular = function (texture, options) {
     options = options || {};
-    var scene = new THREE$1.Scene();
+    var scene = new THREE$2.Scene();
     var shader = {
         uniforms: {
             tEquirect: { value: null },
@@ -55220,16 +55234,16 @@ THREE$1.CubemapGenerator.prototype.fromEquirectangular = function (texture, opti
 			}
 			`
     };
-    var material = new THREE$1.ShaderMaterial({
+    var material = new THREE$2.ShaderMaterial({
         type: 'CubemapFromEquirect',
-        uniforms: THREE$1.UniformsUtils.clone(shader.uniforms),
+        uniforms: THREE$2.UniformsUtils.clone(shader.uniforms),
         vertexShader: shader.vertexShader,
         fragmentShader: shader.fragmentShader,
-        side: THREE$1.BackSide,
-        blending: THREE$1.NoBlending
+        side: THREE$2.BackSide,
+        blending: THREE$2.NoBlending
     });
     material.uniforms.tEquirect.value = texture;
-    var mesh = new THREE$1.Mesh(new THREE$1.BoxBufferGeometry(5, 5, 5), material);
+    var mesh = new THREE$2.Mesh(new THREE$2.BoxBufferGeometry(5, 5, 5), material);
     scene.add(mesh);
     var resolution = options.resolution || 512;
     var params = {
@@ -55240,17 +55254,17 @@ THREE$1.CubemapGenerator.prototype.fromEquirectangular = function (texture, opti
         minFilter: (options.minFilter !== undefined) ? options.minFilter : texture.minFilter,
         magFilter: (options.magFilter !== undefined) ? options.magFilter : texture.magFilter
     };
-    var camera = new THREE$1.CubeCamera(1, 10, resolution, params);
+    var camera = new THREE$2.CubeCamera(1, 10, resolution, params);
     camera.update(this.renderer, scene);
     mesh.geometry.dispose();
     mesh.material.dispose();
     return camera.renderTarget;
 };
-const EquirectangularToCubeGenerator = THREE$1.EquirectangularToCubeGenerator = (function () {
-    var camera = new THREE$1.PerspectiveCamera(90, 1, 0.1, 10);
-    var scene = new THREE$1.Scene();
-    var boxMesh = new THREE$1.Mesh(new THREE$1.BoxBufferGeometry(1, 1, 1), getShader());
-    boxMesh.material.side = THREE$1.BackSide;
+const EquirectangularToCubeGenerator = THREE$2.EquirectangularToCubeGenerator = (function () {
+    var camera = new THREE$2.PerspectiveCamera(90, 1, 0.1, 10);
+    var scene = new THREE$2.Scene();
+    var boxMesh = new THREE$2.Mesh(new THREE$2.BoxBufferGeometry(1, 1, 1), getShader());
+    boxMesh.material.side = THREE$2.BackSide;
     scene.add(boxMesh);
     var EquirectangularToCubeGenerator = function (sourceTexture, options) {
         options = options || {};
@@ -55273,7 +55287,7 @@ const EquirectangularToCubeGenerator = THREE$1.EquirectangularToCubeGenerator = 
             anisotropy: this.sourceTexture.anisotropy,
             encoding: this.sourceTexture.encoding
         };
-        this.renderTarget = new THREE$1.WebGLRenderTargetCube(this.resolution, this.resolution, params);
+        this.renderTarget = new THREE$2.WebGLRenderTargetCube(this.resolution, this.resolution, params);
     };
     EquirectangularToCubeGenerator.prototype = {
         constructor: EquirectangularToCubeGenerator,
@@ -55297,7 +55311,7 @@ const EquirectangularToCubeGenerator = THREE$1.EquirectangularToCubeGenerator = 
         }
     };
     function getShader() {
-        var shaderMaterial = new THREE$1.ShaderMaterial({
+        var shaderMaterial = new THREE$2.ShaderMaterial({
             uniforms: {
                 "equirectangularMap": { value: null },
             },
@@ -55322,7 +55336,7 @@ const EquirectangularToCubeGenerator = THREE$1.EquirectangularToCubeGenerator = 
           vec2 uv = EquirectangularSampleUV(normalize(localPosition));\n\
           gl_FragColor = texture2D(equirectangularMap, uv);\n\
         }",
-            blending: THREE$1.NoBlending
+            blending: THREE$2.NoBlending
         });
         shaderMaterial.type = 'EquirectangularToCubeGenerator';
         return shaderMaterial;
@@ -55330,13 +55344,13 @@ const EquirectangularToCubeGenerator = THREE$1.EquirectangularToCubeGenerator = 
     return EquirectangularToCubeGenerator;
 })();
 
-const THREE$2 = Object.assign({}, ThreeModule);
-const RGBELoader = THREE$2.HDRLoader = THREE$2.RGBELoader = function (manager) {
-    this.manager = (manager !== undefined) ? manager : THREE$2.DefaultLoadingManager;
-    this.type = THREE$2.UnsignedByteType;
+const THREE$3 = Object.assign({}, ThreeModule);
+const RGBELoader = THREE$3.HDRLoader = THREE$3.RGBELoader = function (manager) {
+    this.manager = (manager !== undefined) ? manager : THREE$3.DefaultLoadingManager;
+    this.type = THREE$3.UnsignedByteType;
 };
-THREE$2.RGBELoader.prototype = Object.create(THREE$2.DataTextureLoader.prototype);
-THREE$2.RGBELoader.prototype._parser = function (buffer) {
+THREE$3.RGBELoader.prototype = Object.create(THREE$3.DataTextureLoader.prototype);
+THREE$3.RGBELoader.prototype._parser = function (buffer) {
     var 
     RGBE_RETURN_FAILURE = -1,
     rgbe_read_error = 1, rgbe_write_error = 2, rgbe_format_error = 3, rgbe_memory_error = 4, rgbe_error = function (rgbe_error_code, msg) {
@@ -55500,12 +55514,12 @@ THREE$2.RGBELoader.prototype._parser = function (buffer) {
     if (RGBE_RETURN_FAILURE !== rgbe_header_info) {
         var w = rgbe_header_info.width, h = rgbe_header_info.height, image_rgba_data = RGBE_ReadPixels_RLE(byteArray.subarray(byteArray.pos), w, h);
         if (RGBE_RETURN_FAILURE !== image_rgba_data) {
-            if (this.type === THREE$2.UnsignedByteType) {
+            if (this.type === THREE$3.UnsignedByteType) {
                 var data = image_rgba_data;
-                var format = THREE$2.RGBEFormat;
-                var type = THREE$2.UnsignedByteType;
+                var format = THREE$3.RGBEFormat;
+                var type = THREE$3.UnsignedByteType;
             }
-            else if (this.type === THREE$2.FloatType) {
+            else if (this.type === THREE$3.FloatType) {
                 var RGBEByteToRGBFloat = function (sourceArray, sourceOffset, destArray, destOffset) {
                     var e = sourceArray[sourceOffset + 3];
                     var scale = Math.pow(2.0, e - 128.0) / 255.0;
@@ -55519,8 +55533,8 @@ THREE$2.RGBELoader.prototype._parser = function (buffer) {
                     RGBEByteToRGBFloat(image_rgba_data, j * 4, floatArray, j * 3);
                 }
                 var data = floatArray;
-                var format = THREE$2.RGBFormat;
-                var type = THREE$2.FloatType;
+                var format = THREE$3.RGBFormat;
+                var type = THREE$3.FloatType;
             }
             else {
                 console.error('THREE.RGBELoader: unsupported type: ', this.type);
@@ -55538,7 +55552,7 @@ THREE$2.RGBELoader.prototype._parser = function (buffer) {
     }
     return null;
 };
-THREE$2.RGBELoader.prototype.setType = function (value) {
+THREE$3.RGBELoader.prototype.setType = function (value) {
     this.type = value;
     return this;
 };

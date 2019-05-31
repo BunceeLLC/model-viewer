@@ -15,7 +15,7 @@
 
 import {ACESFilmicToneMapping, EventDispatcher} from 'three';
 
-import {RGBELoader} from '../third_party/three/TransparentWebGLRenderer';
+import {TransparentWebGLRenderer} from '../third_party/three/TransparentWebGLRenderer';
 
 import {IS_WEBXR_AR_CANDIDATE} from '../constants.js';
 import {$tick} from '../model-viewer-base.js';
