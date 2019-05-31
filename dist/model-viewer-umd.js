@@ -55649,12 +55649,10 @@ height: 100%;`);
             try {
                 this.context = getContext(this.canvas, webGlOptions);
                 applyExtensionCompatibility(this.context);
-                this.renderer = new WebGLRenderer({
+                this.renderer = new TransparentWebGLRenderer({
                     canvas: this.canvas,
                     context: this.context,
-                    alpha: true
                 });
-                this.renderer.setClearColor(0x000000, 0);
                 this.renderer.autoClear = false;
                 this.renderer.gammaOutput = true;
                 this.renderer.gammaFactor = 2.2;

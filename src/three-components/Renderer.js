@@ -13,7 +13,9 @@
  * limitations under the License.
  */
 
-import {ACESFilmicToneMapping, EventDispatcher, WebGLRenderer} from 'three';
+import {ACESFilmicToneMapping, EventDispatcher} from 'three';
+
+import {RGBELoader} from '../third_party/three/TransparentWebGLRenderer';
 
 import {IS_WEBXR_AR_CANDIDATE} from '../constants.js';
 import {$tick} from '../model-viewer-base.js';
@@ -60,12 +62,10 @@ export default class Renderer extends EventDispatcher {
       // it to three.
       WebGLUtils.applyExtensionCompatibility(this.context);
 
-      this.renderer = new WebGLRenderer({
+      this.renderer = new TransparentWebGLRenderer({
         canvas: this.canvas,
         context: this.context,
-        alpha: true
       });
-      this.renderer.setClearColor( 0x000000, 0 );
       this.renderer.autoClear = false;
       this.renderer.gammaOutput = true;
       this.renderer.gammaFactor = 2.2;
