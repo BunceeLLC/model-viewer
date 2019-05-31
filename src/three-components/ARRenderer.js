@@ -1,5 +1,5 @@
-import {EventDispatcher, Matrix4, Object3D, PerspectiveCamera, Raycaster, Scene, Vector3, WebGLRenderer} from 'three';
-
+import {EventDispatcher, Matrix4, Object3D, PerspectiveCamera, Raycaster, Scene, Vector3} from 'three';
+import TransparentWebGLRenderer from '../third_party/three/TransparentWebGLRenderer';
 import {assertIsArCandidate} from '../utilities.js';
 
 import Reticle from './Reticle.js';
@@ -81,8 +81,8 @@ export class ARRenderer extends EventDispatcher {
       return;
     }
 
-    this.renderer = new WebGLRenderer(
-        {canvas: this.inputCanvas, context: this.inputContext, alpha: true});
+    this.renderer = new TransparentWebGLRenderer(
+        {canvas: this.inputCanvas, context: this.inputContext});
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(1);
     this.renderer.autoClear = false;

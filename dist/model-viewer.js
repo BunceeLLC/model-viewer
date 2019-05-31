@@ -54244,7 +54244,7 @@ class ARRenderer extends EventDispatcher {
         if (this.renderer != null) {
             return;
         }
-        this.renderer = new WebGLRenderer({ canvas: this.inputCanvas, context: this.inputContext, alpha: true });
+        this.renderer = new TransparentWebGLRenderer({ canvas: this.inputCanvas, context: this.inputContext });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(1);
         this.renderer.autoClear = false;
