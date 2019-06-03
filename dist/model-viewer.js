@@ -54095,18 +54095,23 @@ class ModelScene extends Scene {
 }
 
 const THREE$1 = Object.assign({}, ThreeModule);
-const TransparentWebGLRenderer = THREE$1.TransparentWebGLRenderer = Object.create(THREE$1.WebGLRenderer.prototype);
-TransparentWebGLRenderer.prototype.clear = function (color, depth, stencil) {
-    var bits = 0;
-    if (color === undefined || color)
-        bits |= _gl.COLOR_BUFFER_BIT;
-    if (depth === undefined || depth)
-        bits |= _gl.DEPTH_BUFFER_BIT;
-    if (stencil === undefined || stencil)
-        bits |= _gl.STENCIL_BUFFER_BIT;
-    _gl.clearColor(0, 0, 0, 0);
-    _gl.clear(bits);
+const TransparentWebGLRenderer = function (params) {
+    THREE$1.WebGLRenderer.call(this, params);
+    var self = this;
+    this.clear = function (color, depth, stencil) {
+        var bits = 0;
+        var _gl = self.getContext();
+        if (color === undefined || color)
+            bits |= _gl.COLOR_BUFFER_BIT;
+        if (depth === undefined || depth)
+            bits |= _gl.DEPTH_BUFFER_BIT;
+        if (stencil === undefined || stencil)
+            bits |= _gl.STENCIL_BUFFER_BIT;
+        _gl.clearColor(0, 0, 0, 0);
+        _gl.clear(bits);
+    };
 };
+TransparentWebGLRenderer.prototype = Object.create(THREE$1.WebGLRenderer.prototype);
 
 const matrix4 = new Matrix4();
 const originArray = new Float32Array(3);
