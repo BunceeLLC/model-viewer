@@ -2,7 +2,7 @@ import * as ThreeModule from 'three';
 
 const THREE = {...ThreeModule};
 
-const TransparentWebGLRenderer = THREE.TransparentWebGLRenderer = THREE.WebGLRenderer;
+const TransparentWebGLRenderer = THREE.TransparentWebGLRenderer = Object.create(THREE.WebGLRenderer.prototype);
 
 TransparentWebGLRenderer.prototype.clear = function(color, depth, stencil) {
 	var bits = 0;

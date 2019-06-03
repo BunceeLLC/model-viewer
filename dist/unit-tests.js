@@ -54319,7 +54319,7 @@ class ModelScene extends Scene {
 }
 
 const THREE$1 = Object.assign({}, ThreeModule);
-const TransparentWebGLRenderer = THREE$1.TransparentWebGLRenderer = THREE$1.WebGLRenderer;
+const TransparentWebGLRenderer = THREE$1.TransparentWebGLRenderer = Object.create(THREE$1.WebGLRenderer.prototype);
 TransparentWebGLRenderer.prototype.clear = function (color, depth, stencil) {
     var bits = 0;
     if (color === undefined || color)
@@ -55873,7 +55873,7 @@ class Renderer extends EventDispatcher {
     }
     constructor() {
         super();
-        const webGlOptions = { alpha: false, antialias: true };
+        const webGlOptions = { alpha: true, antialias: true };
         if (IS_WEBXR_AR_CANDIDATE) {
             Object.assign(webGlOptions, { alpha: true, preserveDrawingBuffer: true });
         }
@@ -55884,6 +55884,7 @@ class Renderer extends EventDispatcher {
             this.renderer = new TransparentWebGLRenderer({
                 canvas: this.canvas,
                 context: this.context,
+                alpha: true
             });
             this.renderer.autoClear = false;
             this.renderer.gammaOutput = true;

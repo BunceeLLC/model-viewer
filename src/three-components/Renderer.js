@@ -46,7 +46,7 @@ export default class Renderer extends EventDispatcher {
   constructor() {
     super();
 
-    const webGlOptions = {alpha: false, antialias: true};
+    const webGlOptions = {alpha: true, antialias: true};
 
     // Only enable certain options when Web XR capabilities are detected:
     if (IS_WEBXR_AR_CANDIDATE) {
@@ -65,6 +65,7 @@ export default class Renderer extends EventDispatcher {
       this.renderer = new TransparentWebGLRenderer({
         canvas: this.canvas,
         context: this.context,
+        alpha: true
       });
       this.renderer.autoClear = false;
       this.renderer.gammaOutput = true;
