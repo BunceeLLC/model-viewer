@@ -50426,11 +50426,13 @@ template.innerHTML = `
 
     .container {
       position: relative;
+      width: 100% !important;
+      height: 100% !important;
     }
 
     canvas {
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
       display: none;
     }
 
