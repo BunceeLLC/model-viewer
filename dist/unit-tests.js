@@ -50425,15 +50425,17 @@ template.innerHTML = `
     }
 
     .container {
-      position: relative;
       width: 100% !important;
       height: 100% !important;
+      position: relative;
     }
 
     canvas {
       width: 100% !important;
       height: 100% !important;
       display: none;
+      border: none;
+      outline: none;
     }
 
     canvas.show {
@@ -50521,7 +50523,7 @@ template.innerHTML = `
       width: 100%;
       height: 100%;
 
-      background-color: var(--progress-bar-color, rgba(0, 0, 0, 0.4));
+      background-color: var(--progress-bar-color, rgba(0, 0, 0, 0);
 
       transition: none;
       transform-origin: top left;
