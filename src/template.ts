@@ -127,7 +127,7 @@ template.innerHTML = `
       width: 100%;
       height: 100%;
 
-      background-color: var(--progress-bar-color, rgba(0, 0, 0, 0);
+      background-color: var(--progress-bar-color, rgba(0, 0, 0, 0));
 
       transition: none;
       transform-origin: top left;
