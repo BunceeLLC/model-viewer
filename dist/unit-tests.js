@@ -50477,10 +50477,10 @@ template.innerHTML = `
       width: 100%;
       height: 100%;
       position: absolute;
-      background-size: cover;
+      background-size: contain;
       background-position: center;
-      background-color: var(--poster-color, #fff);
       background-image: var(--poster-image, none);
+      background-repeat: no-repeat;
     }
 
     #default-progress-bar {
