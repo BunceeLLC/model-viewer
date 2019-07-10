@@ -1106,7 +1106,6 @@ template.innerHTML = `
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--progress-mask, #fff);
       opacity: 0;
     }
 
