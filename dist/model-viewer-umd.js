@@ -1113,8 +1113,7 @@
       width: 100%;
       height: 100%;
       background: var(--progress-mask, #fff);
-      transition: opacity 0.3s;
-      opacity: 0.2;
+      opacity: 0;
     }
 
     #default-progress-bar > .bar {
